@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Music Scale - Practice</title>
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+    <h1>Scale Selection</h1>
+    <form>
+        <input type="checkbox" id="cMajor" name="cMajor" value="cMajor">
+        <label for="cMajor">C Major</label> <br/>
+        <br/>
+
+        <input type="checkbox" id="gMajor" name="gMajor" value="gMajor">
+        <label for="gMajor">G Major</label> 
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" id="dMajor" name="dMajor" value="dMajor">
+        <label for="dMajor">D Major</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" id="aMajor" name="aMajor" value="aMajor">
+        <label for="aMajor">A Major</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" id="eMajor" name="eMajor" value="eMajor">
+        <label for="eMajor">E Major</label>
+        <br/>
+
+        <br/>
+
+        <input type="checkbox" id="fMajor" name="fMajor" value="fMajor"> 
+        <label for="fMajor">F Major</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" id="bFlatMajor" name="bFlatMajor" value="bFlatMajor">
+        <label for="bFlatMajor">Bb Major</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" id="eFlatMajor" name="eFlatMajor" value="eFlatMajor">
+        <label for="eFlatMajor">Eb Major</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" id="aFlatMajor" name="aFlatMajor" value="aFlatMajor">
+        <label for="aFlatMajor">Ab Major</label>
+        <br/>
+
+        <br/>
+
+        <input type="checkbox" id="bMajor" name="bMajor" value="bMajor">
+        <label for="bMajor">B Major</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" id="cFlatMajor" name="cFlatMajor" value="cFlatMajor">
+        <label for="cFlatMajor">Cb Major</label>
+        <br/>
+
+        <br/>
+
+        <input type="checkbox" id="fSharpMajor" name="fSharpMajor" value="fSharpMajor">
+        <label for="fSharpMajor">F# Major</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" id="gFlatMajor" name="gFlatMajor" value="gFlatMajor">
+        <label for="gFlatMajor">Gb Major</label>
+        <br/>
+
+        <br/>
+
+        <input type="checkbox" id="cSharpMajor" name="cSharpMajor" value="cSharpMajor">
+        <label for="cSharpMajor">C# Major</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" id="dFlatMajor" name="dFlatMajor" value="dFlatMajor">
+        <label for="dFlatMajor">Db Major</label>
+        <br/>
+
+        <br/>
+        <input type="button" value="Set" onclick="setScaleGroup()">
+        <input type="reset">
+    </form>
+
+    <h1>Scale Position to Note</h1>
+    <div class="question">
+      <input type="button" value="Question (q)" onclick="positionToNoteQuestion();" accesskey="q">
+      <p id="question1"></p>
+    </div>
+    <div class="answer">
+      <input type="button" value="Answer (w)" onclick="positionToNoteAnswer();" accesskey="w">
+      <p id="answer1"></p>
+    </div>
+    
+    <h1>Note to Scale Position</h1>
+    <div class="question">
+      <input type="button" value="Question (a)" onclick="noteToPositionQuestion();" accesskey="a">
+      <p id="question2"></p>
+    </div>
+    <div class="answer">
+      <input type="button" value="Answer (s)" onclick="noteToPositionAnswer();" accesskey="s">
+      <p id="answer2"></p>
+    </div>
+
+    <p>Go back to <a href="index.html">Index</a></p>
+ 
+    <script>
+      
+      /*********************
+      ** Scale Components **
+      **********************/
+      let cMajor = {
+        'C': 'I',
+        'D': 'ii',
+        'E': 'iii',
+        'F': 'IV',
+        'G': 'V',
+        'A': 'vi',
+        'B': 'vii (dim)'
+      };
+
+      let gMajor = {
+        'G': 'I',
+        'A': 'ii',
+        'B': 'iii',
+        'C': 'IV',
+        'D': 'V',
+        'E': 'vi',
+        'F#': 'vii (dim)'
+      };
+
+      let dMajor = {
+        'D': 'I',
+        'E': 'ii',
+        'F#': 'iii',
+        'G': 'IV',
+        'A': 'V',
+        'B': 'vi',
+        'C#': 'vii (dim)'
+      };
+      
+      let aMajor = {
+        'A': 'I',
+        'B': 'ii',
+        'C#': 'iii',
+        'D': 'IV',
+        'E': 'V',
+        'F#': 'vi',
+        'G#': 'vii (dim)'
+      };
+
+      let eMajor = {
+        'E': 'I',
+        'F#': 'ii',
+        'G#': 'iii',
+        'A': 'IV',
+        'B': 'V',
+        'C#': 'vi',
+        'D#': 'vii (dim)'
+      };
+
+      let fMajor = {
+        'F': 'I',
+        'G': 'ii',
+        'A': 'iii',
+        'Bb': 'IV',
+        'C': 'V',
+        'D': 'vi',
+        'E': 'vii (dim)'
+      }
+
+      let bFlatMajor = {
+        'Bb': 'I',
+        'C': 'ii',
+        'D': 'iii',
+        'Eb': 'IV',
+        'F': 'V',
+        'G': 'vi',
+        'A': 'vii (dim)'
+      }
+
+      let eFlatMajor = {
+        'Eb': 'I',
+        'F': 'ii',
+        'G': 'iii',
+        'Ab': 'IV',
+        'Bb': 'V',
+        'C': 'vi',
+        'D': 'vii (dim)'
+      }
+
+      let aFlatMajor = {
+        'Ab': 'I',
+        'Bb': 'ii',
+        'C': 'iii',
+        'Db': 'IV',
+        'Eb': 'V',
+        'F': 'vi',
+        'G': 'vii (dim)'
+      }
+
+      let bMajor = {
+        'B': 'I',
+        'C#': 'ii',
+        'D#': 'iii',
+        'E': 'IV',
+        'F#': 'V',
+        'G#': 'vi',
+        'A#': 'vii (dim)'
+      };
+
+      let cFlatMajor = {
+        'Cb': 'I',
+        'Db': 'ii',
+        'Eb': 'iii',
+        'Fb': 'IV',
+        'Gb': 'V',
+        'Ab': 'vi',
+        'Bb': 'vii (dim)'
+      };
+
+      let fSharpMajor = {
+        'F#': 'I',
+        'G#': 'ii',
+        'A#': 'iii',
+        'B': 'IV',
+        'C#': 'V',
+        'D#': 'vi',
+        'E#': 'vii (dim)'
+      }
+
+      let gFlatMajor = {
+        'Gb': 'I',
+        'Ab': 'ii',
+        'Bb': 'iii',
+        'Cb': 'IV',
+        'Db': 'V',
+        'Eb': 'vi',
+        'F': 'vii (dim)'
+      }
+
+      let cSharpMajor = {
+        'C#': 'I',
+        'D#': 'ii',
+        'E#': 'iii',
+        'F#': 'IV',
+        'G#': 'V',
+        'A#': 'vi',
+        'B#': 'vii (dim)'
+      }
+
+      let dFlatMajor = {
+        'Db': 'I',
+        'Eb': 'ii',
+        'F': 'iii',
+        'Gb': 'IV',
+        'Ab': 'V',
+        'Bb': 'vi',
+        'C': 'vii (dim)'
+      }
+
+      let testableScales = {};
+
+
+      /**************
+      ** Functions **
+      **************/
+      function setScaleGroup() {
+        // reset the testable group to empty
+        testableScales = {}
+
+        // create a dictionary of scales to test, based on user selection
+        if (document.getElementById('cMajor').checked) {
+          testableScales['C Major'] = cMajor;
+        } 
+        if (document.getElementById('gMajor').checked) {
+          testableScales['G Major'] = gMajor;
+        }
+        if (document.getElementById('dMajor').checked) {
+          testableScales['D Major'] = dMajor;
+        }
+        if (document.getElementById('aMajor').checked) {
+          testableScales['A Major'] = aMajor;
+        }
+        if (document.getElementById('eMajor').checked) {
+          testableScales['E Major'] = eMajor;
+        }
+        if (document.getElementById('fMajor').checked) {
+          testableScales['F Major'] = fMajor;
+        }
+        if (document.getElementById('bFlatMajor').checked) {
+          testableScales['Bb Major'] = bFlatMajor;
+        }
+        if (document.getElementById('eFlatMajor').checked) {
+          testableScales['Eb Major'] = eFlatMajor;
+        }
+        if (document.getElementById('aFlatMajor').checked) {
+          testableScales['Ab Major'] = aFlatMajor;
+        }
+        if (document.getElementById('bMajor').checked) {
+          testableScales['B Major'] = bMajor;
+        }
+        if (document.getElementById('cFlatMajor').checked) {
+          testableScales['Cb Major'] = cFlatMajor;
+        }
+        if (document.getElementById('fSharpMajor').checked) {
+          testableScales['F# Major'] = fSharpMajor;
+        }
+        if (document.getElementById('gFlatMajor').checked) {
+          testableScales['Gb Major'] = gFlatMajor;
+        }
+        if (document.getElementById('cSharpMajor').checked) {
+          testableScales['C# Major'] = cSharpMajor;
+        }
+        if (document.getElementById('dFlatMajor').checked) {
+          testableScales['Db Major'] = dFlatMajor;
+        }
+      }
+
+      function randGen(scaleGroup) {
+        // find random scale
+        allScales = Object.keys(scaleGroup);
+        randScaleIndex = Math.floor(Math.random() * allScales.length);
+        randScale = allScales[randScaleIndex];
+        randScaleObj = scaleGroup[randScale];
+
+        // find random note in the random scale
+        allNotes = Object.keys(randScaleObj);
+        randNoteIndex = Math.floor(Math.random() * allNotes.length);
+        randNote = allNotes[randNoteIndex];
+        randNotePos = randScaleObj[randNote];
+
+        // all the above variables are global and can be accessed by the other functions
+      }
+
+      //////////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////////
+
+      function positionToNoteQuestion() {
+        // initiate random scale and note selection
+        randGen(testableScales);
+
+        // clear any previous answer
+        document.getElementById("answer1").innerHTML = '';
+
+        // display question
+        document.getElementById("question1").innerHTML = randScale + ': ' + randNotePos;
+        
+      }
+
+      function positionToNoteAnswer() {
+        // display answer
+        document.getElementById("answer1").innerHTML = randNote;
+      }
+
+      /////////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////
+
+    function noteToPositionQuestion() {
+      //initiate random scale and note selection
+      randGen(testableScales);
+
+      // clear any previous answer
+      document.getElementById("answer2").innerHTML = '';
+
+      // display question
+      document.getElementById("question2").innerHTML = randScale + ': ' + randNote;
+      
+    }
+
+    function noteToPositionAnswer() {
+      // display answer
+      document.getElementById("answer2").innerHTML = randNotePos;
+    }
+
+
+    </script>
+  </body>
+</html>
